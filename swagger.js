@@ -1,6 +1,5 @@
 var swaggerJsdoc = require('swagger-jsdoc');
 var swaggerUi = require('swagger-ui-express');
-var express = require('express')
 
 const options = {
     definition: {
@@ -10,7 +9,7 @@ const options = {
             description: "API endpoints for a library blog services documented on swagger",
             contact: {
                 name: "Arshad Mujawar",
-                email: "arshmujawar17@@gmail.com",
+                email: "arshmujawar17@gmail.com",
                 url: ""
             },
             version: '1.0.0',
@@ -45,9 +44,8 @@ const options = {
 }
 const swaggerSpec = swaggerJsdoc(options)
 function swaggerDocs(app, port) {
-    app.use('/', express.static('public/swagger-ui-dist'))
     // Swagger Page
-    app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
     // Documentation in JSON format
     app.get('/docs.json', (req, res) => {
         res.setHeader('Content-Type', 'application/json')
