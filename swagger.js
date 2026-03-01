@@ -1,6 +1,6 @@
 var swaggerJsdoc = require('swagger-jsdoc');
 var swaggerUi = require('swagger-ui-express');
-
+var express = require('express')
 
 const options = {
     definition: {
@@ -45,8 +45,9 @@ const options = {
 }
 const swaggerSpec = swaggerJsdoc(options)
 function swaggerDocs(app, port) {
+    app.use('/', express.static('public/swagger-ui-dist'))
     // Swagger Page
-    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+    app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
     // Documentation in JSON format
     app.get('/docs.json', (req, res) => {
         res.setHeader('Content-Type', 'application/json')

@@ -57,13 +57,9 @@ app.use(errorMiddleware)
 // and incorrect responses (MIME/content problems) for static asset requests.
 module.exports = app;
 
-// If this file is run directly (node app.js), start the server for local dev.
-// When deployed on Vercel, the platform will `require` this module and handle
-// the HTTP invocation, so `listen` should not be called there.
-if (require.main === module) {
-	const port = process.env.PORT || 3000;
-	app.listen(port, () => {
-		console.log(`Server is running on port ${port}`);
-	});
-}
+// if(!process.env.isProd){
+	app.listen(process.env.PORT , ()=>{
+		console.log(`Server is running on port ${process.env.PORT}`);
+	})
+// }
 
