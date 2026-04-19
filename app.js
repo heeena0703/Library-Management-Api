@@ -26,12 +26,18 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+
+
+// Swagger documentation setup
+swaggerDocs(app, process.env.PORT || 3000);
+
+
 app.use(helmet())
 
 app.use('/auth', authRouter);
 
-// Swagger documentation setup
-swaggerDocs(app, process.env.PORT || 3000);
+
 
 // Apply authentication middleware globally, but skip Swagger endpoints
 // so the Swagger UI assets and JSON are served without auth redirects
